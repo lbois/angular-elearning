@@ -1,0 +1,14 @@
+<p>Login</p>
+<form>
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="inputUsername">Username</label>
+      <input type="text" class="form-control" name="inputUsername" [(ngModel)]="username">
+      
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="inputPassword">Password</label>
+      <input type="password" class="form-control" name="inputPassword" [(ngModel)]="password">
+    </div>
+   
+    <button type="submit" class="btn btn-primary mb-2" (click)='login()'>Login</button>
+  </form>
