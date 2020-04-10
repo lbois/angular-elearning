@@ -1,0 +1,9 @@
+<p>Quuestions list</p>
+
+
+<div *ngFor="let question of questions" className='row'>
+    <div className='jumbotron col-10 offset-1'>
+    <h1>{{question.question_text}}</h1>
+    <p>{{question.answers}}</p>
+    </div>
+  </div>

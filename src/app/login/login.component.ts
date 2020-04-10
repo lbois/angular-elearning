@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.username, this.password)
       .subscribe(
        () => {
-           this.router.navigate([this.returnUrl]);
+           this.router.navigate(['quiz-list']);
        },
        err => {
          // console.log('Error', err);

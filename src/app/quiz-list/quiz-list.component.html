@@ -1,0 +1,11 @@
+<p>Quizes </p>
+(<a href="/quiz-new">new</a>)
+
+
+<div *ngFor="let quiz of quizList" className='row'>
+    <div className='jumbotron col-10 offset-1'>
+    <h1>{{quiz.title}}</h1>
+    <p>{{quiz.description}}</p>
+    <a routerLink="/question-new" [queryParams]="{quizId: quiz._id }">Add questions</a>
+    </div>
+  </div>

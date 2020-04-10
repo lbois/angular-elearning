@@ -1,0 +1,34 @@
+<app-question-list [quizId]="quizId"></app-question-list>
+
+<p>New question</p>
+<form>
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="inputQuestion">Title</label>
+      <input type="text" class="form-control" name="inputQuestion" [(ngModel)]="question_text">
+      
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="inputAnswers1">Answer 1</label>
+      <input type="text" class="form-control" name="inputAnswers1" [(ngModel)]="answers[0]">
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="inputAnswers2">Answer 2</label>
+        <input type="text" class="form-control" name="inputAnswers2" [(ngModel)]="answers[1]">
+      </div>
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="inputAnswers3">Answer 3</label>
+        <input type="text" class="form-control" name="inputAnswers3" [(ngModel)]="answers[2]">
+      </div>
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="inputAnswers4">Answer 4</label>
+        <input type="text" class="form-control" name="inputAnswers4" [(ngModel)]="answers[3]">
+      </div>
+
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="inputCorrectAnswerIndex">Correct answer index</label>
+        <input type="text" class="form-control" name="inputCorrectAnswerIndex" [(ngModel)]="correct_answer_index">
+      </div>
+   
+     
+    <button type="submit" class="btn btn-primary mb-2" (click)='create()'>Create</button>
+  </form>
