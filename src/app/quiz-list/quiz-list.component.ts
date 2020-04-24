@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../quiz.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-quiz-list',
@@ -12,11 +13,21 @@ export class QuizListComponent implements OnInit {
   quizList= []
   showErrorMessage;
   errorMessage;
+  role;
+  username;
 
   ngOnInit() {
 
-    console.log('ngOnInit')
-    this.quizService.getList()
+    let token = localStorage.getItem('token');
+    let helper:JwtHelperService = new JwtHelperService()
+    let decodedToken = helper.decodeToken(token);
+    decodedToken=JSON.parse(JSON.stringify(decodedToken));
+    this.role = decodedToken.role;
+    this.username = decodedToken.username;
+ 
+    console.log(decodedToken)
+
+    this.quizService.getList(this.role)
       .subscribe(
        (res) => {
            this.quizList = res;

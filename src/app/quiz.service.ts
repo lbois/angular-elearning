@@ -10,8 +10,24 @@ export class QuizService {
 
   constructor(private http: HttpClient,) { }
 
-  getList():Observable<any> {
-    console.log('Call HTTP GET')
+  getList(role:string):Observable<any> {
+    console.log(role);
+    if (role === 'student') {
+      console.log('Call HTTP GET (Answers)')
+      return this.http.get<any>("http://localhost:3000/answers/quizes", {})
+      .pipe(map(res => {
+        console.log('getList (answers): ' + res);
+        //this.setSession(res.accessToken);
+        return res;
+        
+      },
+      error => {
+        console.log('Error', error);
+        // console.log(error.error.message);
+        return Observable.throw(error);
+      })); 
+    } else {
+      console.log('Call HTTP GET')
     return this.http.get<any>("http://localhost:3000/quizes", {})
     .pipe(map(res => {
       console.log('getList: ' + res);
@@ -24,6 +40,7 @@ export class QuizService {
       // console.log(error.error.message);
       return Observable.throw(error);
     })); 
+  }
   }
 
 

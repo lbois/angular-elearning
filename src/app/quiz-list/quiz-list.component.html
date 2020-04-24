@@ -4,8 +4,13 @@
 
 <div *ngFor="let quiz of quizList" className='row'>
     <div className='jumbotron col-10 offset-1'>
-    <h1>{{quiz.title}}</h1>
+    <h3>{{quiz.title}}</h3>
     <p>{{quiz.description}}</p>
+    <div *ngIf="username === quiz.user.username">
     <a routerLink="/question-new" [queryParams]="{quizId: quiz._id }">Add questions</a>
     </div>
-  </div>
+    <div *ngIf="role === 'student'">
+      <a routerLink="/answers-list" [queryParams]="{quizId: quiz._id }">Start a quiz</a>
+    </div>
+</div>
+</div>

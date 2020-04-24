@@ -1,0 +1,25 @@
+<div class='row turn'>
+    <div class='jumbotron col-10 offset-1' *ngIf="currentQuestionnaire">
+        <div *ngIf='showErrorMessage === true' style='color:red'>
+            {{errorMessage}}
+        </div>
+        
+        <h4>{{ currentQuestionnaire.question_text }}</h4>
+        <div class='answer' *ngFor="let answer of currentQuestionnaire.answers; let i = index;">
+        <input type='radio' value='{{i}}' name='x' id='z{{i}}' (change)="selectedAnswer(i)">
+        <label for='z{{i}}'>{{ answer }}</label>
+        </div>
+        <div style="display:inline">
+            <button  *ngIf="currentIndex > 0" type="submit" class="btn btn-primary mb-2" (click)='prev()'>Prev</button>
+        &nbsp;
+            <button *ngIf="currentIndex < maxLength-1" type="submit" class="btn btn-primary mb-2" (click)='next()'>Next</button>
+        &nbsp;
+            <button *ngIf="currentIndex === maxLength-1" type="submit" class="btn btn-primary mb-2" (click)='finish()'>Finish</button>
+        
+        </div>
+    </div>
+    <div  *ngIf='currentIndex > maxLength-1' style='color:green'>
+        {{result}}% correct results.
+        <a routerLink='/quiz-list'>Back</a>
+    </div>
+</div>

@@ -17,6 +17,8 @@ import { QuizNewComponent } from './quiz-new/quiz-new.component';
 import { QuestionNewComponent } from './question-new/question-new.component';
 import { QuestionService } from './question.service';
 import { QuestionListComponent } from './question-list/question-list.component';
+import { AnswersListComponent } from './answers-list/answers-list.component';
+import { AnswersResultComponent } from './answers-list/answers-result/answers-result.component';
 
 export function jwtTokenGetter() {
   return localStorage.getItem('token')
@@ -30,7 +32,9 @@ export function jwtTokenGetter() {
     QuizListComponent,
     QuizNewComponent,
     QuestionNewComponent,
-    QuestionListComponent
+    QuestionListComponent,
+    AnswersListComponent,
+    AnswersResultComponent
   ],
   imports: [
     BrowserModule,
