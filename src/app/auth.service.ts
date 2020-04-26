@@ -18,10 +18,11 @@ export class AuthService {
     private http: HttpClient,
   ) { }
 
+   
 
-  login(username:string, password:string) {
+   login(username:string, password:string) {
     // console.log(this.env.apiUrl );
-      return this.http.post<MyJwtToken>("http://localhost:3000/auth/signin", {username, password})
+      return  this.http.post<MyJwtToken>("http://localhost:3000/auth/signin", {username, password})
       .pipe(map(res => {
         this.setSession(res.accessToken);
         console.log('login: ' + res.accessToken);

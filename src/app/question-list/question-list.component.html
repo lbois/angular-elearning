@@ -1,9 +1,18 @@
-<p>Quuestions list</p>
+<p>Questions (<a routerLink="/question-new" [queryParams]="{quizId: quizId }">Add questions</a>)</p>
 
 
 <div *ngFor="let question of questions" className='row'>
     <div className='jumbotron col-10 offset-1'>
-    <h1>{{question.question_text}}</h1>
-    <p>{{question.answers}}</p>
+    <div class='question'>
+    <h3>{{question.question_text}}</h3>
+    <ul *ngFor="let answer of question.answers; let i=index">
+      <li><span *ngIf="i===question.correct_answer_index">[X]</span>{{answer}}</li>
+
+    </ul>
     </div>
-  </div>
+    </div>
+    <div style='float:right;margin:-50px; margin-right:5px'><a routerLink="/question-update" [queryParams]="{id: question._id }" >Update</a>&nbsp;<a routerLink="/question-delete" [queryParams]="{id: question._id, quizId: quizId }" >Delete</a></div>
+  
+  </div> 
+    
+  <a routerLink='/quiz-list'>Back</a>

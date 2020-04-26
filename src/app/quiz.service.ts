@@ -59,4 +59,50 @@ export class QuizService {
     })); 
 
   }
+
+  findById(id:string):Observable<any> {
+    return this.http.get<any>("http://localhost:3000/quizes/"+id)
+    .pipe(map(res => {
+      console.log('getById: ' + res);
+      //this.setSession(res.accessToken);
+      return res;
+      
+    },
+    error => {
+      console.log('Error', error);
+      // console.log(error.error.message);
+      return Observable.throw(error);
+    })); 
+
+  }
+
+  update(id:string, title:string, description:string, author:string):Observable<any> {
+    return this.http.patch<any>("http://localhost:3000/quizes/"+id, {title, description, author})
+    .pipe(map(res => {
+      console.log('update: ' + res);
+      //this.setSession(res.accessToken);
+      return res;
+      
+    },
+    error => {
+      console.log('Error', error);
+      // console.log(error.error.message);
+      return Observable.throw(error);
+    })); 
+  }
+
+  delete(id:string):Observable<any> {
+    return this.http.delete<any>("http://localhost:3000/quizes/"+id)
+    .pipe(map(res => {
+      console.log('delete: ' + res);
+      //this.setSession(res.accessToken);
+      return res;
+      
+    },
+    error => {
+      console.log('Error', error);
+      // console.log(error.error.message);
+      return Observable.throw(error);
+    })); 
+  }
 }

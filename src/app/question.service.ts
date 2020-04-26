@@ -40,4 +40,49 @@ export class QuestionService {
       return Observable.throw(error);
     }));
   }
+
+  findById(id:string):Observable<any> {
+    return this.http.get<any>("http://localhost:3000/questions/"+id)
+    .pipe(map(res => {
+      console.log('getById: ' + JSON.stringify(res));
+      //this.setSession(res.accessToken);
+      return res[0];
+      
+    },
+    error => {
+      console.log('Error', error);
+      // console.log(error.error.message);
+      return Observable.throw(error);
+    })); 
+
+  }
+
+  update(id:string, question_text:string, answers:string[], correct_answer_index:number, 
+    quizId:string):Observable<any> {
+      return this.http.patch<any>("http://localhost:3000/questions/"+id, {question_text, answers, correct_answer_index, quizId})
+      .pipe(map(res => {
+        return res;
+        
+      },
+      error => {
+        console.log('Error', error);
+        // console.log(error.error.message);
+        return Observable.throw(error);
+      }));  
+    }
+
+    delete(id:string):Observable<any> {
+      return this.http.delete<any>("http://localhost:3000/questions/"+id)
+      .pipe(map(res => {
+        console.log('delete: ' + res);
+        //this.setSession(res.accessToken);
+        return res;
+        
+      },
+      error => {
+        console.log('Error', error);
+        // console.log(error.error.message);
+        return Observable.throw(error);
+      })); 
+    }
 }

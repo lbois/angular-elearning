@@ -1,16 +1,19 @@
-<p>Quizes </p>
-(<a href="/quiz-new">new</a>)
+<p>Quizes (<a href="/quiz-new">new</a>)</p>
+
 
 
 <div *ngFor="let quiz of quizList" className='row'>
     <div className='jumbotron col-10 offset-1'>
+    <div class='quiz'>
     <h3>{{quiz.title}}</h3>
     <p>{{quiz.description}}</p>
-    <div *ngIf="username === quiz.user.username">
-    <a routerLink="/question-new" [queryParams]="{quizId: quiz._id }">Add questions</a>
+    <div style='display:inline'>
+    <div *ngIf="username === quiz.user.username && role==='instructor'" style='float:left;margin:-10px;margin-right:1%'>
+    <a routerLink="/question-list" [queryParams]="{quizId: quiz._id }">View questions</a>
+    </div> <div *ngIf="role === 'student'" >
+      <a routerLink="/answers-list" [queryParams]="{quizId: quiz._id }" style='margin:-10px'>Start a quiz</a>
+    </div> <div style='float:right;margin:-15px'><a routerLink="/quiz-update" [queryParams]="{id: quiz._id }" >Update</a>&nbsp;<a routerLink="/quiz-delete" [queryParams]="{id: quiz._id }" >Delete</a></div>
     </div>
-    <div *ngIf="role === 'student'">
-      <a routerLink="/answers-list" [queryParams]="{quizId: quiz._id }">Start a quiz</a>
     </div>
 </div>
 </div>

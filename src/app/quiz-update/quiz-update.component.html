@@ -1,4 +1,4 @@
-<p>New quiz</p>
+<p>Update quiz</p>
 <div style='color:red' *ngIf="showErrorMessage===true">
   {{errorMessage}}
 </div>
@@ -18,5 +18,5 @@
         <input type="text" class="form-control" name="inputAuthor" [(ngModel)]="author">
       </div>
    
-    <button type="submit" class="btn btn-primary mb-2" (click)='create()'>Create</button>
+    <button type="submit" class="btn btn-primary mb-2" (click)='update()'>Update</button>
   </form>

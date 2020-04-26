@@ -1,4 +1,7 @@
-<p>Login</p>
+<p>Login&nbsp;(<a routerLink='/register'>Register</a>)</p>
+<div style='color:red' *ngIf="showErrorMessage===true">
+  {{errorMessage}}
+</div>
 <form>
     <div class="form-group mx-sm-3 mb-2">
       <label for="inputUsername">Username</label>

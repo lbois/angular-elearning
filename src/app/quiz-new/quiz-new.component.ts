@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../quiz.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-quiz-new',
@@ -16,7 +16,7 @@ export class QuizNewComponent implements OnInit {
   showErrorMessage=false;
   errorMessage;
 
-  constructor(private route: ActivatedRoute, private quizService:QuizService) { }
+  constructor(private router:Router, private route: ActivatedRoute, private quizService:QuizService) { }
 
   ngOnInit() {
     
@@ -27,6 +27,7 @@ export class QuizNewComponent implements OnInit {
     .subscribe(
       (res) => {
         this.id = res.id;
+        this.router.navigate(['quiz-list']);
     },
     err => {
       // console.log('Error', err);

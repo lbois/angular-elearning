@@ -1,6 +1,6 @@
 <!--app-question-list [quizId]="quizId"></app-question-list-->
 
-<p>New question</p>
+<p>Update question</p>
 <div style='color:red' *ngIf="showErrorMessage===true">
   {{errorMessage}}
 </div>
@@ -33,5 +33,5 @@
       </div>
    
      
-    <button type="submit" class="btn btn-primary mb-2" (click)='create()'>Save & Next question</button>&nbsp;<button type="submit" class="btn btn-primary mb-2" (click)='finish()'>Save & Finish</button>
+    <button type="submit" class="btn btn-primary mb-2" (click)='update()'>Update</button>
   </form>

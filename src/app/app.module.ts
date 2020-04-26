@@ -18,7 +18,13 @@ import { QuestionNewComponent } from './question-new/question-new.component';
 import { QuestionService } from './question.service';
 import { QuestionListComponent } from './question-list/question-list.component';
 import { AnswersListComponent } from './answers-list/answers-list.component';
-import { AnswersResultComponent } from './answers-list/answers-result/answers-result.component';
+import {AuthGuardService} from './auth-guard.service';
+import { HomeComponent } from './home/home.component';
+import { RoleGuardService } from './role-guard.service';
+import { QuizUpdateComponent } from './quiz-update/quiz-update.component';
+import { QuizDeleteComponent } from './quiz-delete/quiz-delete.component';
+import { QuestionUpdateComponent } from './question-update/question-update.component';
+import { QuestionDeleteComponent } from './question-delete/question-delete.component';
 
 export function jwtTokenGetter() {
   return localStorage.getItem('token')
@@ -34,7 +40,11 @@ export function jwtTokenGetter() {
     QuestionNewComponent,
     QuestionListComponent,
     AnswersListComponent,
-    AnswersResultComponent
+    HomeComponent,
+    QuizUpdateComponent,
+    QuizDeleteComponent,
+    QuestionUpdateComponent,
+    QuestionDeleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +55,7 @@ export function jwtTokenGetter() {
       }
     })
   ],
-  providers: [JwtHelperService, AuthService, HttpClient, QuizService, QuestionService,
+  providers: [RoleGuardService, AuthGuardService, JwtHelperService, AuthService, HttpClient, QuizService, QuestionService,
   [
     {
       provide: HTTP_INTERCEPTORS,

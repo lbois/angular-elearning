@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.username && this.password) {
-      this.authService.login(this.username, this.password)
-      .subscribe(
+       this.authService.login(this.username, this.password)
+       .subscribe(
        () => {
            this.router.navigate(['quiz-list']);
        },

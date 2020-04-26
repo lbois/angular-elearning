@@ -4,11 +4,11 @@ import { QuestionService } from '../question.service';
 
 
 @Component({
-  selector: 'app-question-new',
-  templateUrl: './question-new.component.html',
-  styleUrls: ['./question-new.component.css']
+  selector: 'app-question-update',
+  templateUrl: './question-update.component.html',
+  styleUrls: ['./question-update.component.css']
 })
-export class QuestionNewComponent implements OnInit {
+export class QuestionUpdateComponent implements OnInit {
   @Input()
   id:string;
   quizId:string;
@@ -41,19 +41,40 @@ export class QuestionNewComponent implements OnInit {
       //.filter(params => params.quizId)
       .subscribe(params => {
         console.log(params);
-
+        this.id=params['id'];
         this.quizId = params['quizId'];
-        console.log(this.quizId); 
       });
+
+      this.questionService.findById(this.id).subscribe(
+          (res) => {
+            this.question_text = res.question_text;
+            this.answers=res.answers;
+            this.correct_answer_index = res.correct_answer_index;
+            this.quizId = res.quiz;
+
+        console.log(JSON.stringify(this.quizId));
+
+        },
+        err => {
+          // console.log('Error', err);
+    
+          this.showErrorMessage = true;
+          this.errorMessage = err.error.message;
+          
+    
+        }
+        );
   }
 
-  create() {
+  update() {
     console.log(this.quizId);
-    this.questionService.create(this.question_text, this.answers, this.correct_answer_index, 
+    this.questionService.update(this.id, this.question_text, this.answers, this.correct_answer_index, 
       this.quizId).subscribe(
         (res) => {
           this.id = res.id;
-          this.router.navigate(['question-new'], {queryParams: {refresh: new Date().getTime(), quizId: this.quizId}})
+          // this.router.navigate(['question-new'], {queryParams: {refresh: new Date().getTime(), quizId: this.quizId}})
+            
+          this.router.navigate(['question-list'], {queryParams: {refresh: new Date().getTime(), quizId: this.quizId}})
           
       },
       err => {
@@ -66,23 +87,4 @@ export class QuestionNewComponent implements OnInit {
       }
       );
   }
-  finish() {
-    console.log(this.quizId);
-    this.questionService.create(this.question_text, this.answers, this.correct_answer_index, 
-      this.quizId).subscribe(
-        (res) => {
-          this.id = res.id;
-          this.router.navigate(['quiz-list'])
-      },
-      err => {
-        // console.log('Error', err);
-  
-        this.showErrorMessage = true;
-        this.errorMessage = err.error.message;
-        
-  
-      }
-      );
-  }
-
 }
