@@ -1,3 +1,6 @@
 export const environment = {
-  production: true
+  production: true,
+  url: {
+    back: 'https://cfc2020-elearning.herokuapp.com'
+  }
 };

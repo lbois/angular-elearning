@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
+import { environment } from '../environments/environment';
 import { map } from "rxjs/operators";
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
@@ -22,7 +22,7 @@ export class AuthService {
 
    login(username:string, password:string) {
     // console.log(this.env.apiUrl );
-      return  this.http.post<MyJwtToken>("http://localhost:3000/auth/signin", {username, password})
+      return  this.http.post<MyJwtToken>(environment.url.back+"/auth/signin", {username, password})
       .pipe(map(res => {
         this.setSession(res.accessToken);
         console.log('login: ' + res.accessToken);
@@ -39,7 +39,7 @@ export class AuthService {
 
   register(username:string, password:string, profile:string) {
     // console.log(this.env.apiUrl );
-      return this.http.post<MyJwtToken>("http://localhost:3000/auth/signup", {username, password,profile})
+      return this.http.post<MyJwtToken>(environment.url.back + "/auth/signup", {username, password,profile})
       .pipe(map(res => {
         console.log('register: ' + res);
         //this.setSession(res.accessToken);

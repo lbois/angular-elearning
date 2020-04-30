@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class QuizService {
     console.log(role);
     if (role === 'student') {
       console.log('Call HTTP GET (Answers)')
-      return this.http.get<any>("http://localhost:3000/answers/quizes", {})
+      return this.http.get<any>(environment.url.back + "/answers/quizes", {})
       .pipe(map(res => {
         console.log('getList (answers): ' + res);
         //this.setSession(res.accessToken);
@@ -28,7 +29,7 @@ export class QuizService {
       })); 
     } else {
       console.log('Call HTTP GET')
-    return this.http.get<any>("http://localhost:3000/quizes", {})
+    return this.http.get<any>(environment.url.back + "/quizes", {})
     .pipe(map(res => {
       console.log('getList: ' + res);
       //this.setSession(res.accessToken);
@@ -45,7 +46,7 @@ export class QuizService {
 
 
   create(title:string, description:string, author:string):Observable<any> {
-    return this.http.post<any>("http://localhost:3000/quizes", {title, description, author})
+    return this.http.post<any>(environment.url.back + "/quizes", {title, description, author})
     .pipe(map(res => {
       console.log('create: ' + res);
       //this.setSession(res.accessToken);
@@ -61,7 +62,7 @@ export class QuizService {
   }
 
   findById(id:string):Observable<any> {
-    return this.http.get<any>("http://localhost:3000/quizes/"+id)
+    return this.http.get<any>(environment.url.back + "/quizes/"+id)
     .pipe(map(res => {
       console.log('getById: ' + res);
       //this.setSession(res.accessToken);
@@ -77,7 +78,7 @@ export class QuizService {
   }
 
   update(id:string, title:string, description:string, author:string):Observable<any> {
-    return this.http.patch<any>("http://localhost:3000/quizes/"+id, {title, description, author})
+    return this.http.patch<any>(environment.url.back + "/quizes/"+id, {title, description, author})
     .pipe(map(res => {
       console.log('update: ' + res);
       //this.setSession(res.accessToken);
@@ -92,7 +93,7 @@ export class QuizService {
   }
 
   delete(id:string):Observable<any> {
-    return this.http.delete<any>("http://localhost:3000/quizes/"+id)
+    return this.http.delete<any>(environment.url.back + "/quizes/"+id)
     .pipe(map(res => {
       console.log('delete: ' + res);
       //this.setSession(res.accessToken);

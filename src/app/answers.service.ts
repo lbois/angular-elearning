@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Question } from './question.interface';
 import { Answer } from './answer.interface';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AnswersService {
 
   getList(quizId):Observable<Question[]> {
     console.log('Call HTTP GET')
-    return this.http.get<any>("http://localhost:3000/answers/questions?quizId="+quizId, {})
+    return this.http.get<any>(environment.url.back + "/answers/questions?quizId="+quizId, {})
     .pipe(map(res => {
       console.log('getList: ' + res);
       //this.setSession(res.accessToken);
@@ -29,7 +30,7 @@ export class AnswersService {
   }
 
   create(quizId, answer_pct): Observable<Answer> {
-    return this.http.post<any>("http://localhost:3000/answers", {quizId, answer_pct})
+    return this.http.post<any>(environment.url.back + "/answers", {quizId, answer_pct})
     .pipe(map(res => {
       console.log('create: ' + res);
       //this.setSession(res.accessToken);

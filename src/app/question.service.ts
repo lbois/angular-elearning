@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class QuestionService {
 
   getList(quizId):Observable<any> {
     console.log('Call HTTP GET')
-    return this.http.get<any>("http://localhost:3000/questions?quizId="+quizId, {})
+    return this.http.get<any>(environment.url.back + "/questions?quizId="+quizId, {})
     .pipe(map(res => {
       console.log('getList: ' + res);
       //this.setSession(res.accessToken);
@@ -28,7 +29,7 @@ export class QuestionService {
 
   create(question_text:string, answers:string[],correct_answer_index:number, quizId:string ):Observable<any> {
     console.log('Service POST')
-    return this.http.post<any>("http://localhost:3000/questions", 
+    return this.http.post<any>(environment.url.back + "/questions", 
     {question_text, answers, correct_answer_index, quizId})
     .pipe(map(res => {
       console.log('create: ' + res);
@@ -42,7 +43,7 @@ export class QuestionService {
   }
 
   findById(id:string):Observable<any> {
-    return this.http.get<any>("http://localhost:3000/questions/"+id)
+    return this.http.get<any>(environment.url.back + "/questions/"+id)
     .pipe(map(res => {
       console.log('getById: ' + JSON.stringify(res));
       //this.setSession(res.accessToken);
@@ -59,7 +60,7 @@ export class QuestionService {
 
   update(id:string, question_text:string, answers:string[], correct_answer_index:number, 
     quizId:string):Observable<any> {
-      return this.http.patch<any>("http://localhost:3000/questions/"+id, {question_text, answers, correct_answer_index, quizId})
+      return this.http.patch<any>(environment.url.back + "/questions/"+id, {question_text, answers, correct_answer_index, quizId})
       .pipe(map(res => {
         return res;
         
@@ -72,7 +73,7 @@ export class QuestionService {
     }
 
     delete(id:string):Observable<any> {
-      return this.http.delete<any>("http://localhost:3000/questions/"+id)
+      return this.http.delete<any>(environment.url.back + "/questions/"+id)
       .pipe(map(res => {
         console.log('delete: ' + res);
         //this.setSession(res.accessToken);
