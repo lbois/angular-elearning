@@ -11,7 +11,7 @@
     </ul>
     </div>
     </div>
-    <div style='float:right;margin:-50px; margin-right:5px'><a routerLink="/question-update" [queryParams]="{id: question._id }" >Update</a>&nbsp;<a routerLink="/question-delete" [queryParams]="{id: question._id, quizId: quizId }" >Delete</a></div>
+    <div *ngIf="role === 'instructor'" style='float:right;margin:-50px; margin-right:5px'><a routerLink="/question-update" [queryParams]="{id: question._id }" >Update</a>&nbsp;<a routerLink="/question-delete" [queryParams]="{id: question._id, quizId: quizId }" >Delete</a></div>
   
   </div> 
     

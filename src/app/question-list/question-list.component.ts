@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { QuestionService } from '../question.service';
 import { ActivatedRoute } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-question-list',
@@ -15,6 +16,8 @@ export class QuestionListComponent implements OnInit {
   questions = [];
   showErrorMessage;
   errorMessage;
+  role;
+  username;
 
   constructor(private route:ActivatedRoute, private questionService:QuestionService) { }
 
@@ -42,6 +45,13 @@ export class QuestionListComponent implements OnInit {
 
        }
       );
+
+      let token = localStorage.getItem('token');
+      let helper:JwtHelperService = new JwtHelperService()
+    let decodedToken = helper.decodeToken(token);
+    decodedToken=JSON.parse(JSON.stringify(decodedToken));
+    this.role = decodedToken.role;
+    this.username = decodedToken.username
   }
 
 }
